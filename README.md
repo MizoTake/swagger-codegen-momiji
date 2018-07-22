@@ -67,7 +67,12 @@ the object you have available during client generation:
 # -DdebugOperations prints operations passed to the template engine
 # -DdebugSupportingFiles prints additional data passed to the template engine
 
-java -DdebugOperations -cp /path/to/swagger-codegen-cli.jar:/path/to/your.jar io.swagger.codegen.Codegen -l momiji -i /path/to/swagger.yaml -o ./test
+java -DdebugOperations -cp /path/to/swagger-codegen-cli.jar:/path/to/momiji-swagger-codegen-1.0.0.jar io.swagger.codegen.Codegen -l momiji -i /path/to/swagger.yaml -o ./test
+```
+
+for windows
+```
+java -classpath "path/to/target/momiji-swagger-codegen-1.0.0.jar;modules/swagger-codegen-cli/target/swagger-codegen-cli.jar" io.swagger.codegen.SwaggerCodegen generate -l momiji -i http://petstore.swagger.io/v2/swagger.json -o momiji
 ```
 
 Will, for example, output the debug info for operations.  You can use this info
