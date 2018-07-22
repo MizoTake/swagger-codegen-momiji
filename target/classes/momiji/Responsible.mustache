@@ -1,0 +1,74 @@
+{{>partial_header}}
+using Momiji;
+
+namespace {{packageName}}.{{modelPackage}}
+{
+    {{#models}}
+    {{#model}}
+    {{>visibility}} class {{classname}}Response : IResponsible
+    {
+        {{#isEnum}}
+        /// <summary>
+        /// {{^description}}Defines {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
+        /// </summary>
+        {{#description}}
+        /// <value>{{description}}</value>
+        {{/description}}
+        {{#allowableValues}}{{#enumVars}}{{#-first}}{{#isString}}
+        [JsonConverter(typeof(StringEnumConverter))]
+        {{/isString}}{{/-first}}{{/enumVars}}{{/allowableValues}}
+        {{>visibility}} enum {{#datatypeWithEnum}}{{.}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}{{#vendorExtensions.x-enum-byte}}: byte{{/vendorExtensions.x-enum-byte}}
+        {
+            {{#allowableValues}}{{#enumVars}}
+            /// <summary>
+            /// Enum {{name}} for value: {{{value}}}
+            /// </summary>
+            {{#isString}}[EnumMember(Value = "{{{value}}}")]{{/isString}}
+            {{name}}{{^isString}} = {{{value}}}{{/isString}}{{#isString}} = {{-index}}{{/isString}}{{^-last}},
+            {{/-last}}{{/enumVars}}{{/allowableValues}}
+        }
+        {{/isEnum}}
+
+        {{^isEnum}}
+        {{#vars}}
+        {{#items.isEnum}}
+        {{#items}}
+        {{^complexType}}
+{{>modelInnerEnum}}
+        {{/complexType}}
+        {{/items}}
+        {{/items.isEnum}}
+        {{#isEnum}}
+        {{^complexType}}
+{{>modelInnerEnum}}
+        {{/complexType}}
+        {{/isEnum}}
+        {{#isEnum}}
+        /// <summary>
+        /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
+        /// </summary>
+        {{#description}}
+        /// <value>{{description}}</value>
+        {{/description}}
+        [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
+        public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }
+        {{/isEnum}}
+        {{/vars}}
+
+        {{#vars}}
+        {{^isInherited}}
+        {{^isEnum}}
+        /// <summary>
+        /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
+        /// </summary>{{#description}}
+        /// <value>{{description}}</value>{{/description}}
+        public {{{datatype}}} {{name}};
+        {{/isEnum}}
+        {{/isInherited}}
+
+        {{/vars}}
+        {{/isEnum}}
+    }
+    {{/model}}
+    {{/models}}
+}

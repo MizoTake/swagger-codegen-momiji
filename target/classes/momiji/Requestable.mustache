@@ -1,0 +1,25 @@
+{{>partial_header}}
+using Momiji;
+
+namespace {{packageName}}.{{modelPackage}}
+{
+	{{#operations}}
+	{{#operation}}
+    interface I{{classname}}Request
+	{
+        IObservable<{{classname}}Response> {{httpMethod}} { get; }
+    }
+
+	public class {{classname}}Request : {{httpMethod}}Requestable<{{classname}}Paramter, {{classname}}Response>, I{{classname}}Request
+	{
+		public {{classname}}Request ()
+		{
+			HostName = "{{{basePath}}}";
+            {{#pathParams}}
+            Path = "/{{paramName}}";
+            {{/pathParams}}
+		}
+	}
+	{{/operation}}
+	{{/operations}}
+}
