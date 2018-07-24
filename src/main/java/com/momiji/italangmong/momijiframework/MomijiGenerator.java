@@ -54,13 +54,10 @@ public class MomijiGenerator extends DefaultCodegen implements CodegenConfig {
      * for model, just put another entry in the `modelTemplateFiles` with a
      * different extension
      */
-    // modelTemplateFiles.put("IParameterizable.mustache", // the template to use
-    // "IParameterizable.cs"); // the extension for each file to write
-
+    modelTemplateFiles.put("model.mustache", // the template to use
+        ".cs"); // the extension for each file to write
     modelTemplateFiles.put("Parameterizable.mustache", // the template to use
         "Parameterizable.cs"); // the extension for each file to write
-    // modelTemplateFiles.put("Requestable.mustache", // the template to use
-    // "Requestable.cs"); // the extension for each file to write
     modelTemplateFiles.put("Responsible.mustache", // the template to use
         "Responsible.cs"); // the extension for each file to write
 
@@ -115,8 +112,8 @@ public class MomijiGenerator extends DefaultCodegen implements CodegenConfig {
      * Language Specific Primitives. These types will not trigger imports by the
      * client generator
      */
-    languageSpecificPrimitives = new HashSet<String>(Arrays.asList("Type1", // replace these with your types
-        "Type2"));
+    // languageSpecificPrimitives = new HashSet<String>(Arrays.asList("Integer",
+    // "Boolean", "Long"));
   }
 
   /**
@@ -161,11 +158,11 @@ public class MomijiGenerator extends DefaultCodegen implements CodegenConfig {
     if (p instanceof ArrayProperty) {
       ArrayProperty ap = (ArrayProperty) p;
       Property inner = ap.getItems();
-      return getSwaggerType(p) + "[" + getTypeDeclaration(inner) + "]";
+      return getSwaggerType(p) + "<" + getTypeDeclaration(inner) + ">";
     } else if (p instanceof MapProperty) {
       MapProperty mp = (MapProperty) p;
       Property inner = mp.getAdditionalProperties();
-      return getSwaggerType(p) + "[String, " + getTypeDeclaration(inner) + "]";
+      return getSwaggerType(p) + "<String, " + getTypeDeclaration(inner) + ">";
     }
     return super.getTypeDeclaration(p);
   }

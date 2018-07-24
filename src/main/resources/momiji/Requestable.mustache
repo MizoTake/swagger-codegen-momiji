@@ -5,14 +5,14 @@ namespace {{packageName}}.{{modelPackage}}
 {
 	{{#operations}}
 	{{#operation}}
-    interface I{{classname}}Request
+    interface I{{baseName}}Request
 	{
-        IObservable<{{classname}}Response> {{httpMethod}} { get; }
+        IObservable<{{baseName}}Response> {{httpMethod}} { get; }
     }
 
-	public class {{classname}}Request : {{httpMethod}}Requestable<{{classname}}Paramter, {{classname}}Response>, I{{classname}}Request
+	public class {{baseName}}Request : {{httpMethod}}Requestable<{{baseName}}Paramter, {{baseName}}Response>, I{{baseName}}Request
 	{
-		public {{classname}}Request ()
+		public {{baseName}}Request ()
 		{
 			HostName = "{{{basePath}}}";
             {{#pathParams}}

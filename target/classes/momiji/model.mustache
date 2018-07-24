@@ -5,30 +5,8 @@ namespace {{packageName}}.{{modelPackage}}
 {
     {{#models}}
     {{#model}}
-    {{>visibility}} class {{baseName}}Parameter : {{#queryParams}}IPathParameterizable{{/queryParams}}{{^queryParams}}IParameterizable{{/queryParams}}
+    {{>visibility}} class {{classname}}
     {
-        {{#operations}}
-        {{#operation}}
-        {{#queryParams}}
-        /// <summary>
-        /// {{summary}}
-        /// </summary>
-        /// <remarks>
-        /// {{notes}}
-        /// </remarks>
-        /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
-        /// <returns>{{#returnType}}{{returnType}}{{/returnType}}</returns>
-        public {{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}};
-        {{/queryParams}}
-        {{#queryParams}}
-        public string QueryPath ()
-		{
-			return this.CreatePath (nameof ({{#queryParams}}{{paramName}}) + "=" + {{paramName}}.ToString (){{#hasMore}} + {{/hasMore}}{{/queryParams}});
-		}
-        {{/queryParams}}
-        {{/operation}}
-        {{/operations}}
         {{#isEnum}}
         /// <summary>
         /// {{^description}}Defines {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
@@ -63,16 +41,6 @@ namespace {{packageName}}.{{modelPackage}}
         {{^complexType}}
 {{>modelInnerEnum}}
         {{/complexType}}
-        {{/isEnum}}
-        {{#isEnum}}
-        /// <summary>
-        /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
-        /// </summary>
-        {{#description}}
-        /// <value>{{description}}</value>
-        {{/description}}
-        [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
-        public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }
         {{/isEnum}}
         {{/vars}}
         {{#vars}}

@@ -5,11 +5,11 @@ namespace {{packageName}}.{{modelPackage}}
 {
     {{#models}}
     {{#model}}
-    {{>visibility}} class {{classname}}Parameter : {{#queryParams}}IPathParameterizable{{/queryParams}}{{^queryParams}}IParameterizable{{/queryParams}}
+    {{>visibility}} class {{baseName}}Parameter : {{#queryParams}}IPathParameterizable{{/queryParams}}{{^queryParams}}IParameterizable{{/queryParams}}
     {
         {{#operations}}
         {{#operation}}
-        {{#allParams}}
+        {{#queryParams}}
         /// <summary>
         /// {{summary}}
         /// </summary>
@@ -20,11 +20,11 @@ namespace {{packageName}}.{{modelPackage}}
         /// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
         /// <returns>{{#returnType}}{{returnType}}{{/returnType}}</returns>
         public {{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}};
-        {{/allParams}}
+        {{/queryParams}}
         {{#queryParams}}
         public string QueryPath ()
 		{
-			return this.CreatePath (nameof ({{#allParams}}{{paramName}}) + "=" + {{paramName}}.ToString (){{#hasMore}} + {{/hasMore}}{{/allParams}});
+			return this.CreatePath (nameof ({{#queryParams}}{{paramName}}) + "=" + {{paramName}}.ToString (){{#hasMore}} + {{/hasMore}}{{/queryParams}});
 		}
         {{/queryParams}}
         {{/operation}}
