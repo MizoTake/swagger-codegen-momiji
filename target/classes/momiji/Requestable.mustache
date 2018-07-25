@@ -3,13 +3,13 @@ using Momiji;
 
 namespace {{packageName}}.{{modelPackage}}
 {
-	{{#operations}}
-	{{#operation}}
     interface I{{baseName}}Request
 	{
         IObservable<{{baseName}}Response> {{httpMethod}} { get; }
     }
-
+	
+	{{#operations}}
+	{{#operation}}
 	public class {{baseName}}Request : {{httpMethod}}Requestable<{{baseName}}Paramter, {{baseName}}Response>, I{{baseName}}Request
 	{
 		public {{baseName}}Request ()
@@ -20,6 +20,7 @@ namespace {{packageName}}.{{modelPackage}}
             {{/pathParams}}
 		}
 	}
+
 	{{/operation}}
 	{{/operations}}
 }

@@ -37,7 +37,6 @@ namespace {{packageName}}.{{modelPackage}}
         /// <value>{{description}}</value>
         {{/description}}
         {{#allowableValues}}{{#enumVars}}{{#-first}}{{#isString}}
-        [JsonConverter(typeof(StringEnumConverter))]
         {{/isString}}{{/-first}}{{/enumVars}}{{/allowableValues}}
         {{>visibility}} enum {{#datatypeWithEnum}}{{.}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}{{#vendorExtensions.x-enum-byte}}: byte{{/vendorExtensions.x-enum-byte}}
         {
@@ -71,7 +70,6 @@ namespace {{packageName}}.{{modelPackage}}
         {{#description}}
         /// <value>{{description}}</value>
         {{/description}}
-        [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
         public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }
         {{/isEnum}}
         {{/vars}}

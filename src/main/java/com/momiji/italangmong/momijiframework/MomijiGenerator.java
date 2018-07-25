@@ -58,8 +58,6 @@ public class MomijiGenerator extends DefaultCodegen implements CodegenConfig {
         ".cs"); // the extension for each file to write
     modelTemplateFiles.put("Parameterizable.mustache", // the template to use
         "Parameterizable.cs"); // the extension for each file to write
-    modelTemplateFiles.put("Responsible.mustache", // the template to use
-        "Responsible.cs"); // the extension for each file to write
 
     /**
      * Api classes. You can write classes for each Api file with the
@@ -68,6 +66,8 @@ public class MomijiGenerator extends DefaultCodegen implements CodegenConfig {
      */
     apiTemplateFiles.put("Requestable.mustache", // the template to use
         "Requestable.cs"); // the extension for each file to write
+    apiTemplateFiles.put("Responsible.mustache", // the template to use
+        "Responsible.cs"); // the extension for each file to write
 
     /**
      * Template Location. This is the location which templates will be read from.

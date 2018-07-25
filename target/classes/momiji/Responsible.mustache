@@ -3,25 +3,18 @@ using Momiji;
 
 namespace {{packageName}}.{{modelPackage}}
 {
-    {{#models}}
-    {{#model}}
+    {{#operations}}
+	{{#operation}}
     {{>visibility}} class {{baseName}}Response : IResponsible
     {
-        {{#vars}}
-        {{^isInherited}}
-        {{^isEnum}}
+        {{#responses}}
         /// <summary>
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{description}}</value>{{/description}}
-        [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]{{#isDate}}
-        [JsonConverter(typeof(SwaggerDateConverter))]{{/isDate}}
-        public {{{datatype}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
-        {{/isEnum}}
-        {{/isInherited}}
-
-        {{/vars}}
+        public {{{dataType}}} {{name}};
+        {{/responses}}
     }
-    {{/model}}
-    {{/models}}
+    {{/operation}}
+	{{/operations}}
 }
